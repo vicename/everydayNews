@@ -41,6 +41,7 @@ public class MainActivity extends LibBaseActivity {
         setContentView(R.layout.activity_main);
         mTabLayout = ((LinearLayout) findViewById(R.id.tabLayout));
         mViewPager = ((ViewPager) findViewById(R.id.viewpager));
+        mViewPager.setOffscreenPageLimit(3);
         mViewPager.setAdapter(mTabsAdapter);
         for (int i = 0; i < mTabLayout.getChildCount(); i++) {
             final int finalI = i;
