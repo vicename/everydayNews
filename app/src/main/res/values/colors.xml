@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#f54935</color>
-    <color name="colorPrimaryDark">#f54935</color>
+    <color name="colorPrimary">#e93129</color>
+    <color name="colorPrimaryDark">#e93129</color>
     <color name="colorAccent">#FF4081</color>
 
 
     <color name="divider">#34333333</color>
 
     <color name="text_display1">@android:color/white</color>
+    <color name="text_display2">#919191</color>
+
+
+    <color name="main_tab_bg">#262931</color>
+
+
     <color name="text_primary">#333</color>
     <color name="text_secondary">#999</color>
     <color name="text_3">#aaa</color>

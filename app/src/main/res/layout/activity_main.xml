@@ -1,58 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.guanyue.everydaynews.activity.MainActivity">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.guanyue.everydaynews.activity.MainActivity">
+
+    <com.guanyue.everydaynews.widget.PwMainTitleBar
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"/>
 
     <com.guanyue.everydaynews.view.NoScrollViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toTopOf="@+id/tabLayout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tabLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/titleBar"/>
 
     <LinearLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="#999"
+        android:background="@color/main_tab_bg"
+        android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
-        <ImageView
+        <com.guanyue.everydaynews.widget.MainTabItemLayout
             android:id="@+id/iv_home_tab"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:textColor="@color/text_display1"
+            app:colorNormal="#fff"
+            app:colorSelected="@color/colorPrimary"
+            app:drawableNormal="@drawable/ic_tab_hot_normal"
+            app:drawableSelected="@drawable/ic_tab_hot_accend"
+            app:text="热点"/>
 
-        <ImageView
+        <com.guanyue.everydaynews.widget.MainTabItemLayout
             android:id="@+id/iv_home_tab2"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#333" />
+            app:colorNormal="#fff"
+            app:colorSelected="@color/colorPrimary"
+            app:drawableNormal="@drawable/ic_tab_find_normal"
+            app:drawableSelected="@drawable/ic_tab_find_accend"
+            app:text="行情"/>
 
-        <ImageView
+        <com.guanyue.everydaynews.widget.MainTabItemLayout
             android:id="@+id/iv_home_tab3"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:id="@+id/iv_home_tab4"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#333" />
+            app:colorNormal="#fff"
+            app:colorSelected="@color/colorPrimary"
+            app:drawableNormal="@drawable/ic_tab_user_normal"
+            app:drawableSelected="@drawable/ic_tab_user_accend"
+            app:text="我的"/>
+
     </LinearLayout>
 
 

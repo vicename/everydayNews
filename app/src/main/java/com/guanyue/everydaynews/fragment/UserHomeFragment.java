@@ -14,14 +14,16 @@ import android.widget.TextView;
 import com.generallibrary.utils.Logger;
 import com.guanyue.everydaynews.R;
 import com.guanyue.everydaynews.base.AppBaseV4Fragment;
+import com.guanyue.everydaynews.user.UserBean;
 import com.guanyue.everydaynews.user.UserManager;
+import com.guanyue.everydaynews.widget.PwMainTitleBar;
 
 /**
  * Created by LiDaChang on 17/8/10.
  * __--__---__-------------__----__
  */
 
-public class UserHomeFragment extends AppBaseV4Fragment {
+public class UserHomeFragment extends AppBaseV4Fragment implements UserManager.IUserChangedObserver {
 
     private View mViewLogin;
 
@@ -49,7 +51,7 @@ public class UserHomeFragment extends AppBaseV4Fragment {
 
     @Override
     protected void initVar(Context context) {
-
+        UserManager.getInstance().registerObserver(this);
     }
 
     @Override
@@ -65,11 +67,11 @@ public class UserHomeFragment extends AppBaseV4Fragment {
         TextView tvName = ((TextView) mViewLogin.findViewById(R.id.tv_user_name));
         String name = UserManager.getInstance().getUser().getNickname();
         tvName.setText(name);
-        setItemInfo(mViewLogin.findViewById(R.id.item_user_home_msg), "我的消息", R.drawable.ad_close);
-        setItemInfo(mViewLogin.findViewById(R.id.item_user_home_report), "留言反馈", R.drawable.ad_close);
-        setItemInfo(mViewLogin.findViewById(R.id.item_user_home_clean), "清理缓存", R.drawable.ad_close);
-        setItemInfo(mViewLogin.findViewById(R.id.item_user_home_about), "本站声明", R.drawable.ad_close);
-        setItemInfo(mViewLogin.findViewById(R.id.item_user_home_connect_us), "联系我们", R.drawable.ad_close);
+        setItemInfo(mViewLogin.findViewById(R.id.item_user_home_msg), "我的消息", R.drawable.ic_item_msg);
+        setItemInfo(mViewLogin.findViewById(R.id.item_user_home_report), "留言反馈", R.drawable.ic_item_report);
+        setItemInfo(mViewLogin.findViewById(R.id.item_user_home_clean), "清理缓存", R.drawable.ic_item_clean);
+        setItemInfo(mViewLogin.findViewById(R.id.item_user_home_about), "本站声明", R.drawable.ic_item_about);
+        setItemInfo(mViewLogin.findViewById(R.id.item_user_home_connect_us), "联系我们", R.drawable.ic_item_connect_us);
     }
 
     @Override
@@ -86,6 +88,21 @@ public class UserHomeFragment extends AppBaseV4Fragment {
         ((TextView) view.findViewById(R.id.tv_title_user)).setText(title);
         ((ImageView) view.findViewById(R.id.iv_ic_item_user)).setImageResource(res);
         view.setOnClickListener(new ItemClickListener());
+    }
+
+    @Override
+    public void onUserLogin() {
+
+    }
+
+    @Override
+    public void onUserInfoUpdate(UserBean user) {
+
+    }
+
+    @Override
+    public void onUserLogout() {
+        Logger.i(1, "userLogOut!");
     }
 
     private class ItemClickListener implements View.OnClickListener {
