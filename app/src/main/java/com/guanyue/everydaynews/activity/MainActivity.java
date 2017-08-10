@@ -11,9 +11,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.generallibrary.base.LibBaseActivity;
+import com.generallibrary.base.DifBaseActivity;
 import com.generallibrary.utils.Logger;
 import com.guanyue.everydaynews.R;
+import com.guanyue.everydaynews.fragment.UserHomeFragment;
 import com.guanyue.everydaynews.fragment.WebRelateFragment;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import java.util.List;
 
 import ai.botbrain.ttcloud.sdk.fragment.IndexFragment;
 
-public class MainActivity extends LibBaseActivity {
+public class MainActivity extends DifBaseActivity {
     private TabsAdapter mTabsAdapter;
     private LinearLayout mTabLayout;
     private ViewPager mViewPager;
@@ -32,7 +33,7 @@ public class MainActivity extends LibBaseActivity {
         tabs.add(new TabsAdapter.TabInfo("评论回复", new IndexFragment()));
         tabs.add(new TabsAdapter.TabInfo("点赞通知", WebRelateFragment.newInstance()));
         tabs.add(new TabsAdapter.TabInfo("系统通知", WebRelateFragment.newInstance()));
-        tabs.add(new TabsAdapter.TabInfo("系统通知", WebRelateFragment.newInstance()));
+        tabs.add(new TabsAdapter.TabInfo("用户中心", UserHomeFragment.newInstance()));
         mTabsAdapter = new TabsAdapter(getSupportFragmentManager(), this, tabs);
     }
 
