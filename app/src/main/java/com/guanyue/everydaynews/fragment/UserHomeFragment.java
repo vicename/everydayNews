@@ -1,6 +1,7 @@
 package com.guanyue.everydaynews.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.Nullable;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 
 import com.generallibrary.utils.Logger;
 import com.guanyue.everydaynews.R;
+import com.guanyue.everydaynews.activity.AboutActivity;
+import com.guanyue.everydaynews.activity.ReportActivity;
 import com.guanyue.everydaynews.base.AppBaseV4Fragment;
 import com.guanyue.everydaynews.user.UserBean;
 import com.guanyue.everydaynews.user.UserManager;
@@ -113,10 +116,12 @@ public class UserHomeFragment extends AppBaseV4Fragment implements UserManager.I
                 case R.id.item_user_home_msg:
                     break;
                 case R.id.item_user_home_report:
+                    startActivity(new Intent(mContext, ReportActivity.class));
                     break;
                 case R.id.item_user_home_clean:
                     break;
                 case R.id.item_user_home_about:
+                    startActivity(new Intent(mContext, AboutActivity.class));
                     break;
                 case R.id.item_user_home_connect_us:
                     break;

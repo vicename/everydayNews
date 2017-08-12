@@ -10,7 +10,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.generallibrary.utils.Logger;
 import com.guanyue.everydaynews.R;
 
 /**
@@ -50,13 +49,10 @@ public class PwMainTitleBar extends FrameLayout {
                 }
             }
         });
-        Logger.i(1, "mTvRight:" + mTVRight.isEnabled());
         mTVRight.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Logger.i(23);
                 if (mListener != null) {
-                    Logger.i(21);
                     mListener.onCLick(v);
                 }
             }
@@ -138,7 +134,6 @@ public class PwMainTitleBar extends FrameLayout {
     }
 
     public void setOnItemClickListener(OnMenuItemClickPwListener listener) {
-        Logger.i(22);
         mListener = listener;
     }
 
