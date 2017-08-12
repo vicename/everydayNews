@@ -1,31 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    tools:showIn="@layout/fragment_user_home">
-
-    <include layout="@layout/layout_user_home_header"/>
+    android:orientation="vertical">
 
     <include
-        android:id="@+id/item_user_home_msg"
-        layout="@layout/item_user_home"/>
+        android:id="@+id/include_user_home_header"
+        layout="@layout/layout_user_home_header" />
 
-    <include
-        android:id="@+id/item_user_home_report"
-        layout="@layout/item_user_home"/>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sp1">
 
-    <include
-        android:id="@+id/item_user_home_clean"
-        layout="@layout/item_user_home"/>
+        <include
+            android:id="@+id/item_user_home_msg"
+            layout="@layout/item_user_home" />
 
-    <include
-        android:id="@+id/item_user_home_about"
-        layout="@layout/item_user_home"/>
+        <include
+            android:id="@+id/item_user_home_report"
+            layout="@layout/item_user_home" />
 
-    <include
-        android:id="@+id/item_user_home_connect_us"
-        layout="@layout/item_user_home"/>
-</LinearLayout>
+        <include
+            android:id="@+id/item_user_home_clean"
+            layout="@layout/item_user_home" />
+
+        <include
+            android:id="@+id/item_user_home_about"
+            layout="@layout/item_user_home" />
+
+        <include
+            android:id="@+id/item_user_home_connect_us"
+            layout="@layout/item_user_home" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
