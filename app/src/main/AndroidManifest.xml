@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.guanyue.everydaynews">
-
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <application
         android:name=".base.ApplicationPlus"
         android:allowBackup="true"
@@ -27,6 +30,7 @@
         </activity>
         <activity android:name=".activity.MainActivity">
         </activity>
-    </application>
-
-</manifest>
+        <meta-data android:value="YOUR_APP_KEY" android:name="UMENG_APPKEY"/>
+        <meta-data android:value="Channel ID" android:name="UMENG_CHANNEL"/>
+        </application>
+    </manifest>
