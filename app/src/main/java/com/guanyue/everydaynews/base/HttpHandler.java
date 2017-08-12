@@ -5,9 +5,7 @@ import android.content.Context;
 import com.generallibrary.net.HttpUtils;
 import com.generallibrary.net.IHttpUtils;
 import com.generallibrary.okhttp.callback.Callback;
-import com.generallibrary.utils.LibDateUtil;
 import com.generallibrary.utils.Logger;
-import com.generallibrary.utils.SHA256Utils;
 
 import java.io.File;
 import java.lang.reflect.InvocationHandler;

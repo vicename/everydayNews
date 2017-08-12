@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <declare-styleable name="AvatarImageBehavior">
+        <attr name="finalYPosition" format="dimension"/>
+        <attr name="startXPosition" format="dimension"/>
+        <attr name="startToolbarPosition" format="dimension"/>
+        <attr name="startHeight" format="dimension"/>
+        <attr name="finalHeight" format="dimension"/>
+    </declare-styleable>
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension"/>
+        <attr name="civ_border_color" format="color"/>
+        <attr name="civ_border_overlay" format="boolean"/>
+        <attr name="civ_fill_color" format="color"/>
+    </declare-styleable>
+    <declare-styleable name="RoundedImageView">
+        <attr name="riv_corner_radius" format="dimension"/>
+        <attr name="riv_corner_radius_top_left" format="dimension"/>
+        <attr name="riv_corner_radius_top_right" format="dimension"/>
+        <attr name="riv_corner_radius_bottom_left" format="dimension"/>
+        <attr name="riv_corner_radius_bottom_right" format="dimension"/>
+        <attr name="riv_border_width" format="dimension"/>
+        <attr name="riv_border_color" format="color"/>
+        <attr name="riv_mutate_background" format="boolean"/>
+        <attr name="riv_oval" format="boolean"/>
+        <attr name="android:scaleType"/>
+        <attr name="riv_tile_mode">
+            <enum name="clamp" value="0"/>
+            <enum name="repeat" value="1"/>
+            <enum name="mirror" value="2"/>
+        </attr>
+        <attr name="riv_tile_mode_x">
+            <enum name="clamp" value="0"/>
+            <enum name="repeat" value="1"/>
+            <enum name="mirror" value="2"/>
+        </attr>
+        <attr name="riv_tile_mode_y">
+            <enum name="clamp" value="0"/>
+            <enum name="repeat" value="1"/>
+            <enum name="mirror" value="2"/>
+        </attr>
+    </declare-styleable>
+
+    <!--自定义MLImageView的属性 加上了自己的前缀，防止和其他自定义控件冲突-->
+    <declare-styleable name="MLImageView">
+        <attr name="press_alpha" format="integer"/>
+        <attr name="press_color" format="color"/>
+        <attr name="radius" format="dimension"/>
+        <attr name="border_width" format="dimension"/>
+        <attr name="border_color" format="color"/>
+        <attr name="shape_type" format="enum">
+            <enum name="none" value="0"/>
+            <enum name="round" value="1"/>
+            <enum name="rectangle" value="2"/>
+        </attr>
+    </declare-styleable>
+    <!--圆角layout-->
+    <declare-styleable name="RoundCorner">
+        <attr name="cornerRadius" format="dimension"/>
+        <attr name="topLeftRadius" format="dimension"/>
+        <attr name="topRightRadius" format="dimension"/>
+        <attr name="bottomRightRadius" format="dimension"/>
+        <attr name="bottomLeftRadius" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="MainTab">
+        <attr name="colorNormal" format="color"/>
+        <attr name="colorSelected" format="color"/>
+        <attr name="drawableNormal" format="integer"/>
+        <attr name="drawableSelected" format="integer"/>
+        <attr name="text" format="string"/>
+    </declare-styleable>
+</resources>

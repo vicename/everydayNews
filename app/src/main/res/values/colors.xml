@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#e93129</color>
+    <color name="colorPrimaryDark">#e93129</color>
     <color name="colorAccent">#FF4081</color>
+
+
+    <color name="divider">#34333333</color>
+
+    <color name="text_display1">@android:color/white</color>
+    <color name="text_display2">#919191</color>
+
+
+    <color name="main_tab_bg">#262931</color>
+
+
+    <color name="text_primary">#333</color>
+    <color name="text_secondary">#999</color>
+    <color name="text_3">#aaa</color>
+    <color name="text_4">#eee</color>
+    <color name="text_5">@android:color/white</color>
+
+    <color name="translate_white_15">#15ffffff</color>
+    <color name="translate_white_10">#19ffffff</color>
+    <color name="translate_white_20">#33ffffff</color>
+    <color name="translate_white_30">#4cffffff</color>
+    <color name="translate_white_40">#66ffffff</color>
+    <color name="translate_white_50">#7fffffff</color>
+    <color name="translate_white_60">#99ffffff</color>
+    <color name="translate_white_80">#ccffffff</color>
+
+    <color name="translate_15">#15000000</color>
+    <color name="translate_10">#19000000</color>
+    <color name="translate_20">#33000000</color>
+    <color name="translate_30">#4c000000</color>
+    <color name="translate_40">#66000000</color>
+    <color name="translate_50">#7f000000</color>
+    <color name="translate_60">#99000000</color>
+
 </resources>
