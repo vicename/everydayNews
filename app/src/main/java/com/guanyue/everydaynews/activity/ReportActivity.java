@@ -42,7 +42,17 @@ public class ReportActivity extends AppBaseActivity {
                 mTvTip.setText(tip);
             }
         });
+        findViewById(R.id.tv_submit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submit(mEdtReport.getText().toString());
+            }
 
+        });
+    }
+
+    private void submit(String text) {
+//        showProgressDialog("提交中");
     }
 
     @Override
