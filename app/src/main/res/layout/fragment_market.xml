@@ -7,11 +7,16 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
-        <View
+        android:background="#fff"
+        android:minHeight="39dp">
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            app:layout_scrollFlags="scroll|enterAlways"/>
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
+
+            <include layout="@layout/layout_market_header"/>
+        </FrameLayout>
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v7.widget.RecyclerView
