@@ -8,21 +8,18 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.MediaController;
 
 import com.generallibrary.base.DifBaseActivity;
 import com.generallibrary.utils.Logger;
 import com.guanyue.everydaynews.R;
 import com.guanyue.everydaynews.fragment.UserHomeFragment;
-import com.guanyue.everydaynews.fragment.WebRelateFragment;
+import com.guanyue.everydaynews.fragment.MarketFragment;
 import com.guanyue.everydaynews.presenter.MainPresenter;
 import com.guanyue.everydaynews.user.UserBean;
 import com.guanyue.everydaynews.user.UserManager;
-import com.guanyue.everydaynews.widget.MainTabItemLayout;
 import com.guanyue.everydaynews.widget.PwMainTitleBar;
 
 import java.util.ArrayList;
-import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 import ai.botbrain.ttcloud.sdk.fragment.IndexFragment;
@@ -38,7 +35,7 @@ public class MainActivity extends DifBaseActivity implements UserManager.IUserCh
     protected void initVar() {
         List<TabsAdapter.TabInfo> tabs = new ArrayList<>();
         tabs.add(new TabsAdapter.TabInfo("每日新闻资讯", 0, new IndexFragment()));
-        tabs.add(new TabsAdapter.TabInfo("股市行情", 2, WebRelateFragment.newInstance()));
+        tabs.add(new TabsAdapter.TabInfo("股市行情", 2, MarketFragment.newInstance()));
         tabs.add(new TabsAdapter.TabInfo("我的", 1, UserHomeFragment.newInstance()));
         mTabsAdapter = new TabsAdapter(getSupportFragmentManager(), this, tabs);
         UserManager.getInstance().registerObserver(this);

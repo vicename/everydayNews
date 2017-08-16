@@ -5,6 +5,9 @@
     <color name="colorAccent">#FF4081</color>
 
 
+    <color name="color_rate_up">@color/colorPrimary</color>
+    <color name="color_rate_down">#0DB430</color>
+
     <color name="divider">#34333333</color>
 
     <color name="text_display1">@android:color/white</color>
@@ -16,7 +19,7 @@
 
     <color name="text_primary">#333</color>
     <color name="text_secondary">#999</color>
-    <color name="text_3">#aaa</color>
+    <color name="text_3">#666</color>
     <color name="text_4">#eee</color>
     <color name="text_5">@android:color/white</color>
 

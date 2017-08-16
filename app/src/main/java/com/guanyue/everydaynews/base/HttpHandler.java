@@ -4,7 +4,9 @@ import android.content.Context;
 
 import com.generallibrary.net.HttpUtils;
 import com.generallibrary.net.IHttpUtils;
+import com.generallibrary.okhttp.OkHttpUtils;
 import com.generallibrary.okhttp.callback.Callback;
+import com.generallibrary.okhttp.request.RequestCall;
 import com.generallibrary.utils.Logger;
 
 import java.io.File;
@@ -57,6 +59,13 @@ public class HttpHandler implements IHttpUtils {
             params = new HashMap<>();
         }
         mHttpUtilProxy.get(url, params, callBack);
+    }
+
+    public void getI(String url, Map<String, String> params, final Callback callBack) {
+        Map<String, String> map = new HashMap<>();
+        map.put("Authorization", "APPCODE e1ee13b6190541cf812fd1014cdad9ef");
+        RequestCall call = OkHttpUtils.get().url(url).params(params).headers(map).build();
+        call.execute(callBack);
     }
 
     @Override
