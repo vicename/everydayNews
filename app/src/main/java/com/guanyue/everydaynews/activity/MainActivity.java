@@ -38,7 +38,7 @@ public class MainActivity extends DifBaseActivity implements UserManager.IUserCh
     protected void initVar() {
         List<TabsAdapter.TabInfo> tabs = new ArrayList<>();
         tabs.add(new TabsAdapter.TabInfo("每日新闻资讯", 0, new IndexFragment()));
-        tabs.add(new TabsAdapter.TabInfo("行情", 2, WebRelateFragment.newInstance()));
+        tabs.add(new TabsAdapter.TabInfo("股市行情", 2, WebRelateFragment.newInstance()));
         tabs.add(new TabsAdapter.TabInfo("我的", 1, UserHomeFragment.newInstance()));
         mTabsAdapter = new TabsAdapter(getSupportFragmentManager(), this, tabs);
         UserManager.getInstance().registerObserver(this);
@@ -151,17 +151,22 @@ public class MainActivity extends DifBaseActivity implements UserManager.IUserCh
         mTitleBar.setTitle(info.title);
         switch (info.itemType) {
             case 0:
+                mTitleBar.removeItem2();
                 mTitleBar.setItemRes(R.drawable.ic_search);
                 Logger.i(202);
                 mTitleBar.setOnItemClickListener(new ClickTitleItemSearch());
                 break;
             case 1:
+                mTitleBar.removeItem2();
                 mTitleBar.setItemText("退出");
                 Logger.i(20);
                 mTitleBar.setOnItemClickListener(new ClickTitleItemLogout());
                 break;
             case 2:
-                mTitleBar.clearItem();
+                mTitleBar.setItemRes(R.drawable.ic_search);
+                mTitleBar.setItem2();
+                mTitleBar.setOnItemClickListener(new ClickTitleItemSearch2());
+                mTitleBar.setOnItem2ClickListener(new ClickRefresh());
                 break;
         }
     }
@@ -189,6 +194,22 @@ public class MainActivity extends DifBaseActivity implements UserManager.IUserCh
 
         @Override
         public void onCLick(View view) {
+
+        }
+    }
+
+    private class ClickTitleItemSearch2 implements PwMainTitleBar.OnMenuItemClickPwListener {
+
+        @Override
+        public void onCLick(View view) {
+
+        }
+    }
+
+    private class ClickRefresh implements PwMainTitleBar.OnMenuItem2ClickPwListener {
+
+        @Override
+        public void onClick(View view) {
 
         }
     }

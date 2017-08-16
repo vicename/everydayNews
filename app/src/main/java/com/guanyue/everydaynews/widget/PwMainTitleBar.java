@@ -27,6 +27,8 @@ public class PwMainTitleBar extends FrameLayout {
     private ImageView mIvMenuItem;
     public static final String TAG_ITEM = "item";
     private View mIvBack;
+    private View mViewRefresh;
+    private OnMenuItem2ClickPwListener mMenuItem2Listener;
 
     public PwMainTitleBar(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -40,6 +42,7 @@ public class PwMainTitleBar extends FrameLayout {
         mProg = findViewById(R.id.progress_bar);
         mIvMenuItem = (ImageView) findViewById(R.id.iv_menu_item);
         mViewBottomLine = findViewById(R.id.view_title_bottom_line);
+        mViewRefresh = findViewById(R.id.iv_refresh);
         mIvBack = findViewById(R.id.f_layout_back);
         mIvBack.setOnClickListener(new OnClickListener() {
             @Override
@@ -63,6 +66,14 @@ public class PwMainTitleBar extends FrameLayout {
             public void onClick(View v) {
                 if (mListener != null) {
                     mListener.onCLick(v);
+                }
+            }
+        });
+        mViewRefresh.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mMenuItem2Listener != null) {
+                    mMenuItem2Listener.onClick(v);
                 }
             }
         });
@@ -97,6 +108,14 @@ public class PwMainTitleBar extends FrameLayout {
         mIvMenuItem.setImageResource(res);
         mIvMenuItem.setTag(TAG_ITEM);
         mTVRight.setTag(null);
+    }
+
+    public void setItem2() {
+        mViewRefresh.setVisibility(VISIBLE);
+    }
+
+    public void removeItem2() {
+        mViewRefresh.setVisibility(GONE);
     }
 
     public void clearItem() {
@@ -137,6 +156,10 @@ public class PwMainTitleBar extends FrameLayout {
         mListener = listener;
     }
 
+    public void setOnItem2ClickListener(OnMenuItem2ClickPwListener listener) {
+        mMenuItem2Listener = listener;
+    }
+
     public void setOnNavigationBtnClickListener(OnNavigationBtnClickListener listener) {
         mNavigationClickListener = listener;
         mIvBack.setVisibility(VISIBLE);
@@ -144,6 +167,10 @@ public class PwMainTitleBar extends FrameLayout {
 
     public interface OnMenuItemClickPwListener {
         void onCLick(View view);
+    }
+
+    public interface OnMenuItem2ClickPwListener {
+        void onClick(View view);
     }
 
     public interface OnNavigationBtnClickListener {
