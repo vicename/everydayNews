@@ -5,11 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.generallibrary.base.DifBaseActivity;
 import com.guanyue.everydaynews.R;
 import com.guanyue.everydaynews.widget.PwMainTitleBar;
 
-public class AboutActivity extends DifBaseActivity {
+public class ConnectUsActivity extends AppBaseActivity {
 
     private PwMainTitleBar mTitleBar;
 
@@ -20,7 +19,7 @@ public class AboutActivity extends DifBaseActivity {
 
     @Override
     protected void initView() {
-        setContentView(R.layout.activity_about);
+        setContentView(R.layout.activity_connect_us);
         mTitleBar = ((PwMainTitleBar) findViewById(R.id.titleBar));
         mTitleBar.setOnNavigationBtnClickListener(new PwMainTitleBar.OnNavigationBtnClickListener() {
             @Override
@@ -28,7 +27,7 @@ public class AboutActivity extends DifBaseActivity {
                 finish();
             }
         });
-        mTitleBar.setTitle("本站声明");
+        mTitleBar.setTitle("联系我们");
         findViewById(R.id.tv_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

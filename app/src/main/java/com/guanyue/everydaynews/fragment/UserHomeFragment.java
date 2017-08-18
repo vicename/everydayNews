@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.generallibrary.utils.Logger;
 import com.guanyue.everydaynews.R;
 import com.guanyue.everydaynews.activity.AboutActivity;
+import com.guanyue.everydaynews.activity.ConnectUsActivity;
 import com.guanyue.everydaynews.activity.ReportActivity;
 import com.guanyue.everydaynews.base.AppBaseV4Fragment;
 import com.guanyue.everydaynews.user.UserBean;
@@ -124,6 +125,7 @@ public class UserHomeFragment extends AppBaseV4Fragment implements UserManager.I
                     startActivity(new Intent(mContext, AboutActivity.class));
                     break;
                 case R.id.item_user_home_connect_us:
+                    startActivity(new Intent(mContext, ConnectUsActivity.class));
                     break;
             }
         }

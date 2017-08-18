@@ -1,6 +1,7 @@
 package com.guanyue.everydaynews.activity;
 
 import android.os.Message;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatEditText;
 import android.view.View;
 import android.widget.TextView;
@@ -52,7 +53,20 @@ public class ReportActivity extends AppBaseActivity {
     }
 
     private void submit(String text) {
-//        showProgressDialog("提交中");
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setMessage("提交中...");
+        builder.setCancelable(false);
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+                toastGo("提交成功!");
+
+                String ss = "财经观察—专注财经头条资讯平台每天都来读【财经观察】颠覆传统阅读，个性化推荐模式，运用大数据算法，精准推荐你喜欢的内容，从此不受冗奈信息困扰。【个性化推荐】为你推荐实时财经新闻。【更多行情】更多股票行情，24小时实时更新【简单易用】基本我们的算法，使用很简单，功能很强大，轻松看你想看的财经资讯。建议或意见请联系：邮箱：mrxwkx@sina.com新浪微博：每日财经newsQQ号：2670508246财经观察用户协议\n";
+            }
+        }, 1200);
     }
 
     @Override

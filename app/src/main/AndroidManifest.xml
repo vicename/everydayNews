@@ -74,7 +74,8 @@
             android:value="Channel ID" />
 
         <activity android:name=".activity.AboutActivity" />
-        <activity android:name=".activity.ReportActivity"></activity>
+        <activity android:name=".activity.ReportActivity" />
+        <activity android:name=".activity.ConnectUsActivity"></activity>
     </application>
 
 </manifest>

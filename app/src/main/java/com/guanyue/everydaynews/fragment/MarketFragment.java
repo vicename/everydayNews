@@ -19,6 +19,8 @@ import com.guanyue.everydaynews.data.StockInfoBean;
 import com.guanyue.everydaynews.presenter.MarketPresenter;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -34,6 +36,10 @@ public class MarketFragment extends AppBaseV4Fragment {
     private List<StockInfoBean> mStockList;
     private View mShBox;
     private View mSzBox;
+    private View mViewSortReverse;
+    private boolean mIsRateReverse;
+    private View mTvPriceSort;
+    private boolean mIsPriceReverse;
 
     public static MarketFragment newInstance() {
         MarketFragment fragment = new MarketFragment();
@@ -71,6 +77,10 @@ public class MarketFragment extends AppBaseV4Fragment {
         mRvStock.setAdapter(mStockAdapter);
         mShBox = mView.findViewById(R.id.l_layout_sh_box);
         mSzBox = mView.findViewById(R.id.l_layout_sz_box);
+        mViewSortReverse = mView.findViewById(R.id.tv_rate_guid);
+        mViewSortReverse.setOnClickListener(new ClickReversSort());
+        mTvPriceSort = mView.findViewById(R.id.tv_price_sort);
+        mTvPriceSort.setOnClickListener(new ClickPriceSort());
     }
 
     @Override
@@ -86,6 +96,46 @@ public class MarketFragment extends AppBaseV4Fragment {
 
     public void refresh() {
         loadData();
+    }
+
+    private class SortRateComparator implements Comparator<StockInfoBean> {
+
+        @Override
+        public int compare(StockInfoBean o1, StockInfoBean o2) {
+            float f1 = Float.parseFloat(o1.diff_rate) * 100;
+            float f2 = Float.parseFloat(o2.diff_rate) * 100;
+            return (int) (f2 - f1);
+        }
+    }
+
+    private class SortRateReverseComparator implements Comparator<StockInfoBean> {
+
+        @Override
+        public int compare(StockInfoBean o1, StockInfoBean o2) {
+            float f1 = Float.parseFloat(o1.diff_rate) * 100;
+            float f2 = Float.parseFloat(o2.diff_rate) * 100;
+            return (int) (f1 - f2);
+        }
+    }
+
+    private class SortPriceComparator implements Comparator<StockInfoBean> {
+
+        @Override
+        public int compare(StockInfoBean o1, StockInfoBean o2) {
+            float f1 = Float.parseFloat(o1.nowPrice) * 100;
+            float f2 = Float.parseFloat(o2.nowPrice) * 100;
+            return (int) (f2 - f1);
+        }
+    }
+
+    private class SortPriceReverseComparator implements Comparator<StockInfoBean> {
+
+        @Override
+        public int compare(StockInfoBean o1, StockInfoBean o2) {
+            float f1 = Float.parseFloat(o1.nowPrice) * 100;
+            float f2 = Float.parseFloat(o2.nowPrice) * 100;
+            return (int) (f1 - f2);
+        }
     }
 
     public void setDD(View view, StockIndexBean stockIndexBean) {
@@ -108,12 +158,52 @@ public class MarketFragment extends AppBaseV4Fragment {
         ((TextView) view.findViewById(R.id.tv_info_rate)).setTextColor(color);
     }
 
+    private void sortRateGo() {
+        Comparator<StockInfoBean> sss;
+        if (!mIsRateReverse) {
+            sss = new SortRateComparator();
+        } else {
+            sss = new SortRateReverseComparator();
+        }
+        Collections.sort(mStockList, sss);
+        mIsRateReverse = !mIsRateReverse;
+    }
+
+    private void sortPriceGo() {
+        Comparator<StockInfoBean> sss;
+        if (!mIsPriceReverse) {
+            sss = new SortPriceComparator();
+        } else {
+            sss = new SortPriceReverseComparator();
+        }
+        Collections.sort(mStockList, sss);
+        mIsPriceReverse = !mIsPriceReverse;
+    }
+
+    private class ClickPriceSort implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            sortPriceGo();
+            mStockAdapter.notifyDataSetChanged();
+        }
+    }
+
+    private class ClickReversSort implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            sortRateGo();
+            mStockAdapter.notifyDataSetChanged();
+        }
+
+    }
+
     private class ViewCallback implements MarketPresenter.MarketViewCallback {
 
         @Override
         public void onStockListGetSuccess(List<StockInfoBean> list, StockIndexBean szBean, StockIndexBean shBean) {
             mStockList.clear();
             mStockList.addAll(list);
+            sortRateGo();
             mStockAdapter.notifyItemInserted(0);
             setDD(mShBox, shBean);
             setDD(mSzBox, szBean);
@@ -123,6 +213,6 @@ public class MarketFragment extends AppBaseV4Fragment {
         public void onStockListGetFailed(String msg) {
 
         }
-    }
 
+    }
 }
