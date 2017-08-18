@@ -8,6 +8,7 @@ import com.generallibrary.utils.Logger;
 import com.guanyue.everydaynews.base.HttpHandler;
 import com.guanyue.everydaynews.data.JsonArrayParser;
 import com.guanyue.everydaynews.data.StockBean;
+import com.guanyue.everydaynews.data.StockIndexBean;
 import com.guanyue.everydaynews.data.StockInfoBean;
 
 import org.json.JSONArray;
@@ -87,6 +88,7 @@ public class MarketPresenter {
         Logger.i(1, "ccc:" + ccc);
         Map<String, String> map = new HashMap<>();
         map.put("stocks", ccc);
+        map.put("needIndex", "1");
         HttpHandler.getInstance().getI("https://ali-stock.showapi.com/batch-real-stockinfo", map, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
@@ -109,7 +111,25 @@ public class MarketPresenter {
                                 return new StockInfoBean(jb);
                             }
                         });
-                        mCallback.onStockListGetSuccess(list);
+                        JSONArray jsIndex = jbBody.getJSONArray("indexList");
+                        Logger.i(1, "indexList:" + jsIndex);
+                        List<StockIndexBean> indexBeen = new JsonArrayParser<StockIndexBean>().parasToObjects(jsIndex, new JsonArrayParser.JsonObjectParseIt<StockIndexBean>() {
+                            @Override
+                            public StockIndexBean parasJsonObject(JSONObject jb) {
+                                return new StockIndexBean(jb);
+                            }
+                        });
+                        StockIndexBean szBean = null;
+                        StockIndexBean shBean = null;
+                        for (StockIndexBean stockIndexBean : indexBeen) {
+                            if (stockIndexBean.name.equals("深证成指")) {
+                                szBean = stockIndexBean;
+                            }
+                            if (stockIndexBean.name.equals("上证指数")) {
+                                shBean = stockIndexBean;
+                            }
+                        }
+                        mCallback.onStockListGetSuccess(list, szBean, shBean);
                     } else {
                         mCallback.onStockListGetFailed("");
                     }
@@ -123,7 +143,7 @@ public class MarketPresenter {
 
 
     public interface MarketViewCallback {
-        void onStockListGetSuccess(List<StockInfoBean> list);
+        void onStockListGetSuccess(List<StockInfoBean> list, StockIndexBean szBean, StockIndexBean shBean);
 
         void onStockListGetFailed(String msg);
     }

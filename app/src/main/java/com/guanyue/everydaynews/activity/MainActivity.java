@@ -207,7 +207,8 @@ public class MainActivity extends DifBaseActivity implements UserManager.IUserCh
 
         @Override
         public void onClick(View view) {
-
+            Logger.i(1,"aaaaaa");
+            ((MarketFragment) mTabsAdapter.getItem(1)).refresh();
         }
     }
 
