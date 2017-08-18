@@ -1,6 +1,7 @@
 package com.guanyue.everydaynews.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -191,7 +192,7 @@ public class MainActivity extends DifBaseActivity implements UserManager.IUserCh
 
         @Override
         public void onCLick(View view) {
-
+            startActivity(new Intent(mContext, SearchActivity.class));
         }
     }
 
@@ -207,7 +208,7 @@ public class MainActivity extends DifBaseActivity implements UserManager.IUserCh
 
         @Override
         public void onClick(View view) {
-            Logger.i(1,"aaaaaa");
+            Logger.i(1, "aaaaaa");
             ((MarketFragment) mTabsAdapter.getItem(1)).refresh();
         }
     }

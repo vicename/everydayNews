@@ -4,12 +4,15 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.generallibrary.okhttp.callback.StringCallback;
+import com.generallibrary.utils.DifStrMatcher;
+import com.generallibrary.utils.DifStrUtils;
 import com.generallibrary.utils.Logger;
 import com.guanyue.everydaynews.base.HttpHandler;
 import com.guanyue.everydaynews.data.JsonArrayParser;
 import com.guanyue.everydaynews.data.StockBean;
 import com.guanyue.everydaynews.data.StockIndexBean;
 import com.guanyue.everydaynews.data.StockInfoBean;
+import com.qq.e.comm.util.StringUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -136,6 +139,51 @@ public class MarketPresenter {
                 } catch (JSONException e) {
                     mCallback.onStockListGetFailed("");
                     e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void searchStock(String keyWord) {
+        Map<String, String> map = new HashMap<>();
+        if (DifStrMatcher.isNumber(keyWord)) {
+            map.put("code", keyWord);
+        } else if (DifStrMatcher.isContainChinese(keyWord)) {
+            map.put("name", keyWord);
+        } else {
+            map.put("pinyin", keyWord);
+        }
+
+        HttpHandler.getInstance().getI("https://ali-stock.showapi.com/name-to-stockinfo", map, new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                mCallback.onStockListGetFailed("");
+                Logger.i(1, "error:" + e.toString());
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                try {
+                    JSONObject jb = new JSONObject(response);
+                    int code = jb.optInt("showapi_res_code", -1);
+                    if (code == 0) {
+                        JSONObject jbBody = jb.getJSONObject("showapi_res_body");
+                        JSONArray ja = jbBody.getJSONArray("list");
+                        List<StockBean> list = new JsonArrayParser<StockBean>().parasToObjects(ja, new JsonArrayParser.JsonObjectParseIt<StockBean>() {
+                            @Override
+                            public StockBean parasJsonObject(JSONObject jb) {
+                                return new StockBean(jb);
+                            }
+                        });
+//                        mCallback.onStockListGetSuccess(list);
+                        getInfo(list);
+                        Logger.i(1, "list:" + ja.toString());
+                    } else {
+                        mCallback.onStockListGetFailed("");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    mCallback.onStockListGetFailed("");
                 }
             }
         });
