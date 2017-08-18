@@ -13,6 +13,7 @@ android {
         ndk {
             abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
         }
+        multiDexEnabled true//用于解决64k方法数问题
     }
     buildTypes {
         release {
@@ -36,6 +37,8 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:4.0.0-RC1'
     compile 'com.umeng.analytics:analytics:latest.integration'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC1'
+    compile project(':PushSDK')
+    compile project(':ums')
 }
 
 repositories {

@@ -10,6 +10,7 @@ import com.generallibrary.utils.Logger;
 import com.generallibrary.utils.SPUtils;
 import com.guanyue.everydaynews.user.UserBean;
 import com.guanyue.everydaynews.user.UserManager;
+import com.umeng.socialize.PlatformConfig;
 
 import ai.botbrain.ttcloud.api.TtCloudManager;
 import ai.botbrain.ttcloud.api.TtcClient;
@@ -36,6 +37,10 @@ public class PingApplication extends ApplicationBase implements UserManager.IUse
         HttpHandler.initInstance(this);
         mUserManager = UserManager.getInstance();
         mUserManager.registerObserver(this);
+
+        PlatformConfig.setWeixin("","");
+        PlatformConfig.setQQZone("","");
+        PlatformConfig.setSinaWeibo("","","");
     }
 
     public void setLibDebug(boolean isDebug) {

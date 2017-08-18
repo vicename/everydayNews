@@ -1,7 +1,9 @@
 package com.guanyue.everydaynews.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -45,6 +47,11 @@ public class MainActivity extends DifBaseActivity implements UserManager.IUserCh
     @Override
     protected void initView() {
         setContentView(R.layout.activity_main);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE};
+//            checkPermission()
+            requestPermissions(permissions, 1);
+        }
         mTitleBar = ((PwMainTitleBar) findViewById(R.id.titleBar));
         mTitleBar.disableBottomLine();
         mTabLayout = ((LinearLayout) findViewById(R.id.tabLayout));
