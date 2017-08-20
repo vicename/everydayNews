@@ -49,10 +49,10 @@ public class MainActivity extends DifBaseActivity implements UserManager.IUserCh
         List<TabsAdapter.TabInfo> tabs = new ArrayList<>();
         mNewsIndexFragment = new IndexFragment();
         TtCloudListener.User user = new TtCloudListener.User();
-        user.setUserId("222");
-        user.setUserName("bubu");
-        user.setUserNickName("haha");
-        user.setUserAvatar("http://cn.bing.com/s/cn/cn_logo_serp.png");
+//        user.setUserId("222");
+//        user.setUserName("bubu");
+//        user.setUserNickName("haha");
+//        user.setUserAvatar("http://cn.bing.com/s/cn/cn_logo_serp.png");
 //        TtCloudManager.login(user);
         TtCloudManager.setCallBack(new TtCloudListener() {
             @Override
@@ -63,20 +63,26 @@ public class MainActivity extends DifBaseActivity implements UserManager.IUserCh
             @Override
             public void onShare(View view, Article article, User user, ResultCallBack callBack) {
                 Logger.i(442);
-                ThirdLoginHandler.share((Activity) view.getContext());
+                ThirdLoginHandler.share((Activity) view.getContext(),article);
             }
 
             @Override
             public void onLiked(Article article, User user) {
-                MsgBean bean = new MsgBean("你点赞了文章:" + article.getContentTitle(), System.currentTimeMillis());
-                UserHistoryManager.getInstance().saveBrowsHistory(bean);
+                Logger.i(1, "like:" + article.toString());
+                if (article.getContentTitle() != null) {
+                    MsgBean bean = new MsgBean("你点赞了文章:<" + article.getContentTitle() + ">", System.currentTimeMillis());
+                    UserHistoryManager.getInstance().saveBrowsHistory(bean);
+                }
                 Logger.i(443);
 
             }
 
             @Override
             public void onComment(View view, Article article, User user) {
-                Logger.i(1, "user:" + user.toString());
+//                Logger.i(1, "user:" + user.toString());
+                if (user == null) {
+                    toastGo("请先登录");
+                }
                 Logger.i(444);
             }
         });

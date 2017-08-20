@@ -39,11 +39,11 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    //    compile(name: 'bot-video-news-07121131', ext: 'aar')
     compile project(':PushSDK')
     compile project(':ums')
-    compile 'com.github.vicename:maibo-library:v2.0.6'
+//    compile(name: 'bot-video-news-07121131', ext: 'aar')
     compile 'ai.botbrain.ttcloud:libraryTtc:1.0.0'
+    compile 'com.github.vicename:maibo-library:v2.0.6'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:support-v4:24.2.1'

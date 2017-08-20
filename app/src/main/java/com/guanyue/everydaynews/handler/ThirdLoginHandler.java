@@ -8,8 +8,12 @@ import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMWeb;
 
 import java.util.Map;
+
+import ai.botbrain.ttcloud.api.TtCloudListener;
 
 /**
  * Created by Li DaChang on 17/8/20.
@@ -42,10 +46,18 @@ public class ThirdLoginHandler {
         });
     }
 
-    public static void share(Activity activity) {
+    public static void share(Activity activity, TtCloudListener.Article article) {
+        if (article == null) {
+            return;
+        }
+        UMWeb web = new UMWeb(article.getContentUrl());
+        web.setTitle(article.getContentTitle());//标题
+//        web.setThumb(new UMImage(activity,));  //缩略图
+        web.setDescription("");//描述
         new ShareAction(activity)
-                .withText("hello")
-                .setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE)
+                .withText("我在财经观察上看到一篇文章,分享给你")
+                .withMedia(web)
+                .setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
                 .setCallback(new UMShareListener() {
                     @Override
                     public void onStart(SHARE_MEDIA share_media) {

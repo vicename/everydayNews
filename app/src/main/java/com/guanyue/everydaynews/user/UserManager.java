@@ -125,12 +125,12 @@ public class UserManager {
             clearUser();
             TtCloudManager.logout();
         } else {
-            TtCloudListener.User user = new TtCloudListener.User();
-            user.setUserAvatar(mUserBean.getPhoto());
-            user.setUserNickName(mUserBean.getNickname());
-            user.setUserName(mUserBean.getNickname());
-            user.setUserId("a1a1");
-            TtCloudManager.login(user);
+//            TtCloudListener.User user = new TtCloudListener.User();
+//            user.setUserAvatar(mUserBean.getPhoto());
+//            user.setUserNickName(mUserBean.getNickname());
+//            user.setUserName(mUserBean.getNickname());
+//            user.setUserId("a1a1");
+//            TtCloudManager.login(user);
         }
         mSPUtils.put(KEY_IS_LOGIN, isLogin);
         Logger.i(1, "login!");

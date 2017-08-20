@@ -128,8 +128,8 @@ public class StockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         public MessageViewHolder(final View itemView) {
             super(itemView);
-            tvName = ((TextView) itemView.findViewById(R.id.tv_title));
-            tvNum = ((TextView) itemView.findViewById(R.id.tv_code));
+            tvName = ((TextView) itemView.findViewById(R.id.tv_name));
+            tvNum = ((TextView) itemView.findViewById(R.id.tv_num));
             tvAccent = ((TextView) itemView.findViewById(R.id.tv_accent));
             tvAmmount = ((TextView) itemView.findViewById(R.id.tv_ammount));
         }
