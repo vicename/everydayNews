@@ -19,7 +19,7 @@
     <ImageView
         android:id="@+id/iv_ic_item_user"
         android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_height="10dp"
         android:layout_marginLeft="16dp"
         android:scaleType="centerInside"
         android:src="@drawable/ic_item_about"
@@ -29,10 +29,11 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
+        android:layout_width="14dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginRight="20dp"
+        android:rotation="-90"
         android:layout_marginTop="8dp"
         android:tint="@color/text_secondary"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -43,9 +44,6 @@
     <View
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:layout_marginBottom="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
         android:background="@color/divider"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

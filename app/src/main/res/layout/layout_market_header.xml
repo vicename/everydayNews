@@ -139,8 +139,6 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="15dp"
         android:drawablePadding="10dp"
-        android:drawableRight="@drawable/picture"
-        android:layout_marginRight="4dp"
         android:text="涨跌幅"
         android:textColor="@color/text_3"
         android:textSize="14sp"
