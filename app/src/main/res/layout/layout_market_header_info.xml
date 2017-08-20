@@ -5,14 +5,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="@layout/layout_market_header">
 
-    <TextView
-        android:id="@+id/tv_info_dot"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:drawableRight="@drawable/ic_tab_user_accend"
         android:gravity="center"
-        android:text="sdf"/>
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/tv_info_dot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginRight="4dp"
+            android:text=""/>
+
+        <ImageView
+            android:id="@+id/iv_info_rate_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/s1"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

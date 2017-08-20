@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="@layout/layout_user_home_login">
+       xmlns:app="http://schemas.android.com/apk/res-auto"
+       xmlns:tools="http://schemas.android.com/tools"
+       tools:showIn="@layout/layout_user_home_login">
 
     <View
         android:layout_width="0dp"
@@ -11,7 +11,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/sp1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <com.guanyue.everydaynews.view.RoundedLayout
         android:id="@+id/rl1"
@@ -27,7 +27,8 @@
             android:id="@+id/iv_user_head"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ddd" />
+            android:src="@drawable/settings_icon_account"
+            android:tint="@color/text_display1"/>
     </com.guanyue.everydaynews.view.RoundedLayout>
 
     <TextView
@@ -35,17 +36,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="TextView"
+        android:text="点击登录"
         android:textColor="@color/text_display1"
         android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rl1" />
+        app:layout_constraintTop_toBottomOf="@+id/rl1"/>
 
     <Space
         android:id="@+id/sp1"
         android:layout_width="0dp"
         android:layout_height="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_user_name"/>
 </merge>

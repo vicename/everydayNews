@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.generallibrary.utils.Logger;
@@ -40,6 +41,7 @@ public class MarketFragment extends AppBaseV4Fragment {
     private boolean mIsRateReverse;
     private View mTvPriceSort;
     private boolean mIsPriceReverse;
+    private ImageView mIvRate;
 
     public static MarketFragment newInstance() {
         MarketFragment fragment = new MarketFragment();
@@ -81,6 +83,7 @@ public class MarketFragment extends AppBaseV4Fragment {
         mViewSortReverse.setOnClickListener(new ClickReversSort());
         mTvPriceSort = mView.findViewById(R.id.tv_price_sort);
         mTvPriceSort.setOnClickListener(new ClickPriceSort());
+        mIvRate = ((ImageView) mView.findViewById(R.id.iv_list_rate));
     }
 
     @Override
@@ -141,9 +144,14 @@ public class MarketFragment extends AppBaseV4Fragment {
     public void setDD(View view, StockIndexBean stockIndexBean) {
         float rate = Float.parseFloat(stockIndexBean.diff_rate);
         int color;
+        ImageView ivRate = (ImageView) view.findViewById(R.id.iv_info_rate_arrow);
         if (rate < 0) {
             color = ContextCompat.getColor(mContext, R.color.color_rate_down);
+            ivRate.setImageResource(R.drawable.s2);
+            ivRate.setRotation(180);
         } else if (rate > 0) {
+            ivRate.setImageResource(R.drawable.s1);
+            ivRate.setRotation(0);
             color = ContextCompat.getColor(mContext, R.color.color_rate_up);
             stockIndexBean.diff_rate = "+" + stockIndexBean.diff_rate;
             stockIndexBean.diff_money = "+" + stockIndexBean.diff_money;
@@ -167,6 +175,11 @@ public class MarketFragment extends AppBaseV4Fragment {
         }
         Collections.sort(mStockList, sss);
         mIsRateReverse = !mIsRateReverse;
+        if (mIsRateReverse) {
+            mIvRate.setRotation(0);
+        } else {
+            mIvRate.setRotation(180);
+        }
     }
 
     private void sortPriceGo() {
