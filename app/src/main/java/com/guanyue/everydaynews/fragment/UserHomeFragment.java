@@ -21,9 +21,17 @@ import com.guanyue.everydaynews.activity.ReportActivity;
 import com.guanyue.everydaynews.base.AppBaseV4Fragment;
 import com.guanyue.everydaynews.handler.CleanCacheManager;
 import com.guanyue.everydaynews.handler.FileUtils;
+import com.guanyue.everydaynews.handler.ThirdLoginHandler;
 import com.guanyue.everydaynews.user.UserBean;
 import com.guanyue.everydaynews.user.UserManager;
 import com.guanyue.everydaynews.widget.PwMainTitleBar;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+
+import java.util.Map;
 
 /**
  * Created by LiDaChang on 17/8/10.
@@ -101,6 +109,7 @@ public class UserHomeFragment extends AppBaseV4Fragment implements UserManager.I
     private void getCacheSize() {
 
     }
+
     private void clearCache() {
         FileUtils.deleteFolderFile(getActivity().getExternalCacheDir().getPath(), true);
         FileUtils.deleteFolderFile(getActivity().getCacheDir().getPath(), true);
@@ -132,7 +141,9 @@ public class UserHomeFragment extends AppBaseV4Fragment implements UserManager.I
                 case R.id.item_user_home_msg:
                     break;
                 case R.id.item_user_home_report:
-                    startActivity(new Intent(mContext, ReportActivity.class));
+//                    startActivity(new Intent(mContext, ReportActivity.class));
+                    ThirdLoginHandler.login(getActivity(), SHARE_MEDIA.QQ);
+//                    ThirdLoginHandler.share(getActivity());
                     break;
                 case R.id.item_user_home_clean:
                     clearCache();

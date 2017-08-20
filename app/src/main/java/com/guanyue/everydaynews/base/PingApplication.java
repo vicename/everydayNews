@@ -10,6 +10,7 @@ import com.generallibrary.utils.Logger;
 import com.generallibrary.utils.SPUtils;
 import com.guanyue.everydaynews.user.UserBean;
 import com.guanyue.everydaynews.user.UserManager;
+import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 
 import ai.botbrain.ttcloud.api.TtCloudManager;
@@ -38,9 +39,11 @@ public class PingApplication extends ApplicationBase implements UserManager.IUse
         mUserManager = UserManager.getInstance();
         mUserManager.registerObserver(this);
 
-        PlatformConfig.setWeixin("","");
-        PlatformConfig.setQQZone("","");
-        PlatformConfig.setSinaWeibo("","","");
+        PlatformConfig.setWeixin("wx328519b634560bdd","6bd0246663ac997bcbd027c970d39833");
+        PlatformConfig.setQQZone("1106201347 ","GAq8u9xHK7gNiOYI ");
+        PlatformConfig.setSinaWeibo("3274816143","551255e9158aeb1f65e28c73ee45c6d1","http://open.weibo.com/apps/3274816143/privilege/oauth");
+        Config.DEBUG = true;
+//        PlatformConfig.set
     }
 
     public void setLibDebug(boolean isDebug) {

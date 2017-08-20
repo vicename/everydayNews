@@ -1,4 +1,4 @@
-package com.dc.ums.apshare;
+package com.guanyue.everydaynews.ums.apshare;
 
 import com.umeng.socialize.media.ShareCallbackActivity;
 

@@ -37,7 +37,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ad_icon_arrow" />
+        app:srcCompat="@drawable/picture" />
 
     <View
         android:layout_width="0dp"

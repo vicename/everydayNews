@@ -1,6 +1,7 @@
 package com.guanyue.everydaynews.activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -10,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.generallibrary.base.DifBaseActivity;
@@ -17,14 +19,19 @@ import com.generallibrary.utils.Logger;
 import com.guanyue.everydaynews.R;
 import com.guanyue.everydaynews.fragment.UserHomeFragment;
 import com.guanyue.everydaynews.fragment.MarketFragment;
+import com.guanyue.everydaynews.handler.ThirdLoginHandler;
 import com.guanyue.everydaynews.presenter.MainPresenter;
 import com.guanyue.everydaynews.user.UserBean;
 import com.guanyue.everydaynews.user.UserManager;
 import com.guanyue.everydaynews.widget.PwMainTitleBar;
+import com.umeng.socialize.UMShareAPI;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ai.botbrain.ttcloud.api.TtCloudListener;
+import ai.botbrain.ttcloud.api.TtCloudManager;
+import ai.botbrain.ttcloud.api.TtcClient;
 import ai.botbrain.ttcloud.sdk.fragment.IndexFragment;
 
 public class MainActivity extends DifBaseActivity implements UserManager.IUserChangedObserver {
@@ -33,17 +40,47 @@ public class MainActivity extends DifBaseActivity implements UserManager.IUserCh
     private ViewPager mViewPager;
     private PwMainTitleBar mTitleBar;
     private MainPresenter mPresenter;
+    private IndexFragment mNewsIndexFragment;
 
     @Override
     protected void initVar() {
         List<TabsAdapter.TabInfo> tabs = new ArrayList<>();
-        tabs.add(new TabsAdapter.TabInfo("每日新闻资讯", 0, new IndexFragment()));
+        mNewsIndexFragment = new IndexFragment();
+        TtCloudManager.setCallBack(new TtCloudListener() {
+            @Override
+            public void onBack(ImageView iv_back) {
+                Logger.i(441);
+            }
+
+            @Override
+            public void onShare(View view, Article article, User user, ResultCallBack callBack) {
+                Logger.i(442);
+                ThirdLoginHandler.share((Activity) view.getContext());
+            }
+
+            @Override
+            public void onLiked(Article article, User user) {
+                Logger.i(443);
+
+            }
+
+            @Override
+            public void onComment(View view, Article article, User user) {
+                TtcClient client = new TtcClient.Builder().build();
+                Logger.i(444);
+            }
+        });
+        tabs.add(new TabsAdapter.TabInfo("每日新闻资讯", 0, mNewsIndexFragment));
         tabs.add(new TabsAdapter.TabInfo("股市行情", 2, MarketFragment.newInstance()));
         tabs.add(new TabsAdapter.TabInfo("我的", 1, UserHomeFragment.newInstance()));
         mTabsAdapter = new TabsAdapter(getSupportFragmentManager(), this, tabs);
         UserManager.getInstance().registerObserver(this);
     }
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
     @Override
     protected void initView() {
         setContentView(R.layout.activity_main);

@@ -1,4 +1,4 @@
-package com.dc.ums.ddshare;
+package com.guanyue.everydaynews.ums.ddshare;
 
 
 import com.umeng.socialize.media.DingCallBack;
