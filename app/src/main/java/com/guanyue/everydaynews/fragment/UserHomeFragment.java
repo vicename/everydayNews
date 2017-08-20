@@ -16,6 +16,7 @@ import com.generallibrary.utils.Logger;
 import com.guanyue.everydaynews.R;
 import com.guanyue.everydaynews.activity.AboutActivity;
 import com.guanyue.everydaynews.activity.ConnectUsActivity;
+import com.guanyue.everydaynews.activity.LoginActivity;
 import com.guanyue.everydaynews.activity.ReportActivity;
 import com.guanyue.everydaynews.base.AppBaseV4Fragment;
 import com.guanyue.everydaynews.user.UserBean;
@@ -68,9 +69,19 @@ public class UserHomeFragment extends AppBaseV4Fragment implements UserManager.I
 
     private void initLoginView() {
         ImageView ivHead = ((ImageView) mViewLogin.findViewById(R.id.iv_user_head));
+        ivHead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!UserManager.getInstance().isLogin()) {
+                    startActivity(new Intent(mContext, LoginActivity.class));
+                }
+            }
+        });
         TextView tvName = ((TextView) mViewLogin.findViewById(R.id.tv_user_name));
-        String name = UserManager.getInstance().getUser().getNickname();
-        tvName.setText(name);
+        if (UserManager.getInstance().isLogin()) {
+            String name = UserManager.getInstance().getUser().getNickname();
+            tvName.setText(name);
+        }
         setItemInfo(mViewLogin.findViewById(R.id.item_user_home_msg), "我的消息", R.drawable.ic_item_msg);
         setItemInfo(mViewLogin.findViewById(R.id.item_user_home_report), "留言反馈", R.drawable.ic_item_report);
         setItemInfo(mViewLogin.findViewById(R.id.item_user_home_clean), "清理缓存", R.drawable.ic_item_clean);
