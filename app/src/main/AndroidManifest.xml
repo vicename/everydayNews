@@ -71,7 +71,6 @@
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="Channel ID" />
-
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="561cae6ae0f55abd990035bf" />
@@ -82,16 +81,15 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
         <activity
             android:name="com.sina.weibo.sdk.share.WbShareTransActivity"
             android:launchMode="singleTask"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".wxapi.WXEntryActivity"
@@ -99,12 +97,10 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
         <activity
             android:name="com.umeng.qq.tencent.AuthActivity"
             android:launchMode="singleTask"
             android:noHistory="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -119,7 +115,6 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
         <activity
             android:name="com.umeng.socialize.editorpage.ShareActivity"
             android:excludeFromRecents="true"
@@ -127,9 +122,9 @@
         <activity android:name=".activity.AboutActivity" />
         <activity android:name=".activity.ReportActivity" />
         <activity android:name=".activity.ConnectUsActivity" />
-        <activity android:name=".activity.SearchActivity"></activity>
-
-        <activity android:name=".activity.LoginActivity"></activity>
+        <activity android:name=".activity.SearchActivity" />
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.UserMsgActivity"></activity>
     </application>
 
 </manifest>
