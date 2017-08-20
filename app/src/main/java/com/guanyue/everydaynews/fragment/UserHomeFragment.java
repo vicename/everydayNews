@@ -81,14 +81,7 @@ public class UserHomeFragment extends AppBaseV4Fragment implements UserManager.I
 
     private void initLoginView() {
         ImageView ivHead = ((ImageView) mViewLogin.findViewById(R.id.iv_user_head));
-        ivHead.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!UserManager.getInstance().isLogin()) {
-                    startActivity(new Intent(mContext, LoginActivity.class));
-                }
-            }
-        });
+        ivHead.setOnClickListener(new ItemClickListener());
         TextView tvName = ((TextView) mViewLogin.findViewById(R.id.tv_user_name));
         if (UserManager.getInstance().isLogin()) {
             String name = UserManager.getInstance().getUser().getNickname();
@@ -150,6 +143,12 @@ public class UserHomeFragment extends AppBaseV4Fragment implements UserManager.I
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
+                case R.id.iv_user_head:
+                    if (!UserManager.getInstance().isLogin()) {
+//                        startActivity(new Intent(mContext, LoginActivity.class));
+                        ToastUtils.showToast(mContext, "登录功能马上上线,请期待");
+                    }
+                    break;
                 case R.id.item_user_home_msg:
                     startActivity(new Intent(mContext, UserMsgActivity.class));
                     break;
