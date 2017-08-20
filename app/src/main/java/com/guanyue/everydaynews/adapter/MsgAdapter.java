@@ -1,7 +1,6 @@
 package com.guanyue.everydaynews.adapter;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,28 +9,34 @@ import android.widget.TextView;
 
 import com.generallibrary.adapter.base_recycler.OnItemClickDifListener;
 import com.guanyue.everydaynews.R;
-import com.guanyue.everydaynews.data.StockInfoBean;
+import com.guanyue.everydaynews.data.MsgBean;
 
+import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by LiDaChang on 17/8/17.
  * __--__---__-------------__----__
  */
 
-public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MsgAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context mContext;
-    List<StockInfoBean> list;
+    List<MsgBean> list;
     public static final int TYPE_HEADER = 0;
     public static final int TYPE_NORMAL = 1;
 
     private View mHeaderView;
 
     private OnItemClickDifListener onItemClickRecyclerListener;
+    private SimpleDateFormat simpleDateFormat;
 
-    public SearchResultAdapter(Context context, List<StockInfoBean> list) {
+    public MsgAdapter(Context context, List<MsgBean> list) {
         this.list = list;
         this.mContext = context;
+        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
     }
 
     @Override
@@ -44,7 +49,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 }
                 break;
             case TYPE_NORMAL:
-                View viewLiveRoomMessage = LayoutInflater.from(mContext).inflate(R.layout.item_stock_list, parent, false);
+                View viewLiveRoomMessage = LayoutInflater.from(mContext).inflate(R.layout.item_msg, parent, false);
                 holder = new MessageViewHolder(viewLiveRoomMessage);
                 break;
         }
@@ -80,25 +85,10 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     }
                 }
             });
-            int color = 0;
-            String rate = list.get(pos).diff_rate;
-            float rateF = Float.parseFloat(rate);
-            if (rateF < 0) {
-                color = ContextCompat.getColor(mContext, R.color.color_rate_down);
-            } else if (rateF > 0) {
-                if (!rate.startsWith("+")) {
-                    rate = "+" + rate;
-                }
-                color = ContextCompat.getColor(mContext, R.color.color_rate_up);
-            } else {
-                color = ContextCompat.getColor(mContext, R.color.text_secondary);
-            }
-            ((MessageViewHolder) holder).tvName.setText(list.get(pos).name);
-            ((MessageViewHolder) holder).tvAmmount.setText(list.get(pos).nowPrice);
-            ((MessageViewHolder) holder).tvAmmount.setTextColor(color);
-            ((MessageViewHolder) holder).tvAccent.setText(rate);
-            ((MessageViewHolder) holder).tvAccent.setTextColor(color);
-            ((MessageViewHolder) holder).tvNum.setText(list.get(pos).num);
+            MessageViewHolder msgHolder = (MessageViewHolder) holder;
+            msgHolder.tvMsg.setText(list.get(pos).msgContent);
+            String time = simpleDateFormat.format(new Date(list.get(pos).time));
+            msgHolder.tvTime.setText(time);
         }
     }
 
@@ -121,17 +111,13 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     private class MessageViewHolder extends RecyclerView.ViewHolder {
-        private final TextView tvName;
-        private final TextView tvNum;
-        private final TextView tvAccent;
-        private final TextView tvAmmount;
+        private final TextView tvMsg;
+        private final TextView tvTime;
 
         public MessageViewHolder(final View itemView) {
             super(itemView);
-            tvName = ((TextView) itemView.findViewById(R.id.tv_title));
-            tvNum = ((TextView) itemView.findViewById(R.id.tv_code));
-            tvAccent = ((TextView) itemView.findViewById(R.id.tv_accent));
-            tvAmmount = ((TextView) itemView.findViewById(R.id.tv_ammount));
+            tvMsg = ((TextView) itemView.findViewById(R.id.tv_msg));
+            tvTime = ((TextView) itemView.findViewById(R.id.tv_sava_time));
         }
     }
 

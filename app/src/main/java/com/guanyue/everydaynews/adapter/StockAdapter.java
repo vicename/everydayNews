@@ -6,12 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.generallibrary.adapter.base_recycler.OnItemClickDifListener;
 import com.guanyue.everydaynews.R;
-import com.guanyue.everydaynews.data.StockBean;
 import com.guanyue.everydaynews.data.StockInfoBean;
 
 import java.util.List;
@@ -130,8 +128,8 @@ public class StockAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         public MessageViewHolder(final View itemView) {
             super(itemView);
-            tvName = ((TextView) itemView.findViewById(R.id.tv_name));
-            tvNum = ((TextView) itemView.findViewById(R.id.tv_num));
+            tvName = ((TextView) itemView.findViewById(R.id.tv_title));
+            tvNum = ((TextView) itemView.findViewById(R.id.tv_code));
             tvAccent = ((TextView) itemView.findViewById(R.id.tv_accent));
             tvAmmount = ((TextView) itemView.findViewById(R.id.tv_ammount));
         }

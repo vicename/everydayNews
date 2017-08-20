@@ -19,6 +19,7 @@ import com.guanyue.everydaynews.activity.AboutActivity;
 import com.guanyue.everydaynews.activity.ConnectUsActivity;
 import com.guanyue.everydaynews.activity.LoginActivity;
 import com.guanyue.everydaynews.activity.ReportActivity;
+import com.guanyue.everydaynews.activity.UserMsgActivity;
 import com.guanyue.everydaynews.base.AppBaseV4Fragment;
 import com.guanyue.everydaynews.handler.CleanCacheManager;
 import com.guanyue.everydaynews.handler.FileUtils;
@@ -150,6 +151,7 @@ public class UserHomeFragment extends AppBaseV4Fragment implements UserManager.I
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.item_user_home_msg:
+                    startActivity(new Intent(mContext, UserMsgActivity.class));
                     break;
                 case R.id.item_user_home_report:
                     startActivity(new Intent(mContext, ReportActivity.class));

@@ -11,6 +11,9 @@ import com.guanyue.everydaynews.base.PingApplication;
 import java.util.ArrayList;
 import java.util.List;
 
+import ai.botbrain.ttcloud.api.TtCloudListener;
+import ai.botbrain.ttcloud.api.TtCloudManager;
+
 /**
  * Created by LiDaChang on 16/11/24.
  * __--__---__-------------__----__
@@ -120,6 +123,14 @@ public class UserManager {
     public void setIsLogin(boolean isLogin) {
         if (!isLogin) {
             clearUser();
+            TtCloudManager.logout();
+        } else {
+            TtCloudListener.User user = new TtCloudListener.User();
+            user.setUserAvatar(mUserBean.getPhoto());
+            user.setUserNickName(mUserBean.getNickname());
+            user.setUserName(mUserBean.getNickname());
+            user.setUserId("a1a1");
+            TtCloudManager.login(user);
         }
         mSPUtils.put(KEY_IS_LOGIN, isLogin);
         Logger.i(1, "login!");
