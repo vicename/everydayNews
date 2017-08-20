@@ -48,6 +48,7 @@ public class SearchActivity extends AppBaseActivity {
                     toastGo("搜索内容不能为空");
                     return;
                 }
+                Logger.i(1, "key:" + keyWord);
                 mMarketPresenter.searchStock(keyWord);
                 showProgress("搜索中...");
             }

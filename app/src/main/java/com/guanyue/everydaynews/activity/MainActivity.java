@@ -76,11 +76,13 @@ public class MainActivity extends DifBaseActivity implements UserManager.IUserCh
         mTabsAdapter = new TabsAdapter(getSupportFragmentManager(), this, tabs);
         UserManager.getInstance().registerObserver(this);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
+
     @Override
     protected void initView() {
         setContentView(R.layout.activity_main);
@@ -200,7 +202,11 @@ public class MainActivity extends DifBaseActivity implements UserManager.IUserCh
                 break;
             case 1:
                 mTitleBar.removeItem2();
-                mTitleBar.setItemText("退出");
+                if (UserManager.getInstance().isLogin()) {
+                    mTitleBar.setItemText("退出");
+                } else {
+                    mTitleBar.setItemText(null);
+                }
                 Logger.i(20);
                 mTitleBar.setOnItemClickListener(new ClickTitleItemLogout());
                 break;
@@ -244,7 +250,7 @@ public class MainActivity extends DifBaseActivity implements UserManager.IUserCh
 
         @Override
         public void onCLick(View view) {
-
+            startActivity(new Intent(mContext, SearchActivity.class));
         }
     }
 

@@ -152,9 +152,7 @@ public class UserHomeFragment extends AppBaseV4Fragment implements UserManager.I
                 case R.id.item_user_home_msg:
                     break;
                 case R.id.item_user_home_report:
-//                    startActivity(new Intent(mContext, ReportActivity.class));
-                    ThirdLoginHandler.login(getActivity(), SHARE_MEDIA.QQ);
-//                    ThirdLoginHandler.share(getActivity());
+                    startActivity(new Intent(mContext, ReportActivity.class));
                     break;
                 case R.id.item_user_home_clean:
                     clearCache();

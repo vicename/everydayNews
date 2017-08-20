@@ -1,4 +1,4 @@
-package com.guanyue.everydaynews.ums.wxapi;
+package com.guanyue.everydaynews.wxapi;
 
 
 //import com.umeng.weixin.callback.WXCallbackActivity;

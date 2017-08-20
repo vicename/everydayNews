@@ -17,4 +17,11 @@
         <item name="android:splitMotionEvents">false</item>
     </style>
 
+    <style name="AppTheme.V2" parent="AppTheme">
+        <!--禁用多点触控-->
+        <item name="android:windowEnableSplitTouch">false</item>
+        <item name="android:splitMotionEvents">false</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
 </resources>

@@ -99,6 +99,12 @@ public class PwMainTitleBar extends FrameLayout {
             mTVRight.setTag(TAG_ITEM);
             mIvMenuItem.setTag(null);
             setItemEnable(true);
+        } else {
+            mIvMenuItem.setTag(null);
+            setItemEnable(true);
+            mTVRight.setTag(TAG_ITEM);
+            mIvMenuItem.setVisibility(GONE);
+            mTVRight.setVisibility(GONE);
         }
     }
 
