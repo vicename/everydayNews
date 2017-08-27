@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.generallibrary.utils.Logger;
 import com.generallibrary.utils.ToastUtils;
 import com.guanyue.everydaynews.R;
@@ -21,6 +23,7 @@ import com.guanyue.everydaynews.activity.LoginActivity;
 import com.guanyue.everydaynews.activity.ReportActivity;
 import com.guanyue.everydaynews.activity.UserMsgActivity;
 import com.guanyue.everydaynews.base.AppBaseV4Fragment;
+import com.guanyue.everydaynews.base.PingApplication;
 import com.guanyue.everydaynews.handler.CleanCacheManager;
 import com.guanyue.everydaynews.handler.FileUtils;
 import com.guanyue.everydaynews.handler.ThirdLoginHandler;
@@ -72,6 +75,12 @@ public class UserHomeFragment extends AppBaseV4Fragment implements UserManager.I
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        UserManager.getInstance().unregisterObserver(this);
+    }
+
+    @Override
     protected void initView(Bundle savedInstanceState) {
         mViewLogin = LayoutInflater.from(mContext).inflate(R.layout.layout_user_home_login, (ViewGroup) mView, false);
         ((ViewGroup) mView).removeAllViews();
@@ -81,11 +90,23 @@ public class UserHomeFragment extends AppBaseV4Fragment implements UserManager.I
 
     private void initLoginView() {
         ImageView ivHead = ((ImageView) mViewLogin.findViewById(R.id.iv_user_head));
-        ivHead.setOnClickListener(new ItemClickListener());
         TextView tvName = ((TextView) mViewLogin.findViewById(R.id.tv_user_name));
         if (UserManager.getInstance().isLogin()) {
             String name = UserManager.getInstance().getUser().getNickname();
             tvName.setText(name);
+            String url = UserManager.getInstance().getUser().getPhoto();
+            if ("http://cn.bing.com/s/cn/cn_logo_serp.png".equals(url) | TextUtils.isEmpty(url)) {
+                ivHead.setImageResource(R.drawable.settings_icon_account);
+            } else {
+                Glide.with(PingApplication.getInstance())
+                        .load(UserManager.getInstance().getUser().getPhoto())
+                        .into(ivHead);
+            }
+            ivHead.setOnClickListener(null);
+        } else {
+            tvName.setText("点击登录");
+            ivHead.setImageResource(R.drawable.settings_icon_account);
+            ivHead.setOnClickListener(new ItemClickListener());
         }
         setItemInfo(mViewLogin.findViewById(R.id.item_user_home_msg), "我的消息", R.drawable.ic_item_msg);
         setItemInfo(mViewLogin.findViewById(R.id.item_user_home_report), "留言反馈", R.drawable.ic_item_report);
@@ -125,7 +146,8 @@ public class UserHomeFragment extends AppBaseV4Fragment implements UserManager.I
 
     @Override
     public void onUserLogin() {
-
+        Logger.i(1, "login!");
+        initLoginView();
     }
 
     @Override
@@ -136,6 +158,8 @@ public class UserHomeFragment extends AppBaseV4Fragment implements UserManager.I
     @Override
     public void onUserLogout() {
         Logger.i(1, "userLogOut!");
+        ToastUtils.showToast(PingApplication.getInstance(), "退出登录成功");
+        initLoginView();
     }
 
     private class ItemClickListener implements View.OnClickListener {
@@ -145,8 +169,8 @@ public class UserHomeFragment extends AppBaseV4Fragment implements UserManager.I
             switch (v.getId()) {
                 case R.id.iv_user_head:
                     if (!UserManager.getInstance().isLogin()) {
-//                        startActivity(new Intent(mContext, LoginActivity.class));
-                        ToastUtils.showToast(mContext, "登录功能马上上线,请期待");
+                        startActivity(new Intent(mContext, LoginActivity.class));
+//                        ToastUtils.showToast(mContext, "登录功能马上上线,请期待");
                     }
                     break;
                 case R.id.item_user_home_msg:

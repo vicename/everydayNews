@@ -49,11 +49,14 @@ public class MainActivity extends DifBaseActivity implements UserManager.IUserCh
         List<TabsAdapter.TabInfo> tabs = new ArrayList<>();
         mNewsIndexFragment = new IndexFragment();
         TtCloudListener.User user = new TtCloudListener.User();
-//        user.setUserId("222");
-//        user.setUserName("bubu");
-//        user.setUserNickName("haha");
-//        user.setUserAvatar("http://cn.bing.com/s/cn/cn_logo_serp.png");
-//        TtCloudManager.login(user);
+        if (UserManager.getInstance().isLogin()) {
+            UserBean userBean = UserManager.getInstance().getUser();
+            user.setUserId(userBean.getUserId());
+            user.setUserName(userBean.getNickname());
+            user.setUserAvatar(userBean.getPhoto());
+            user.setUserNickName(userBean.getNickname());
+            TtCloudManager.login(user);
+        }
         TtCloudManager.setCallBack(new TtCloudListener() {
             @Override
             public void onBack(ImageView iv_back) {
@@ -63,7 +66,7 @@ public class MainActivity extends DifBaseActivity implements UserManager.IUserCh
             @Override
             public void onShare(View view, Article article, User user, ResultCallBack callBack) {
                 Logger.i(442);
-                ThirdLoginHandler.share((Activity) view.getContext(),article);
+                ThirdLoginHandler.share((Activity) view.getContext(), article);
             }
 
             @Override
@@ -74,15 +77,17 @@ public class MainActivity extends DifBaseActivity implements UserManager.IUserCh
                     UserHistoryManager.getInstance().saveBrowsHistory(bean);
                 }
                 Logger.i(443);
-
             }
 
             @Override
             public void onComment(View view, Article article, User user) {
-//                Logger.i(1, "user:" + user.toString());
-                if (user == null) {
-                    toastGo("请先登录");
+                if (!UserManager.getInstance().isLogin()) {
+                    startActivity(new Intent(mContext, LoginActivity.class));
+                } else {
+                    MsgBean bean = new MsgBean("你评论了文章:<" + article.getContentTitle() + ">", System.currentTimeMillis());
+                    UserHistoryManager.getInstance().saveBrowsHistory(bean);
                 }
+                Logger.i(1, "islogin:" + TtCloudManager.isLogin());
                 Logger.i(444);
             }
         });
@@ -91,6 +96,7 @@ public class MainActivity extends DifBaseActivity implements UserManager.IUserCh
         tabs.add(new TabsAdapter.TabInfo("我的", 1, UserHomeFragment.newInstance()));
         mTabsAdapter = new TabsAdapter(getSupportFragmentManager(), this, tabs);
         UserManager.getInstance().registerObserver(this);
+        mPresenter = MainPresenter.create(mContext, new ViewCallback());
     }
 
     @Override
@@ -125,7 +131,6 @@ public class MainActivity extends DifBaseActivity implements UserManager.IUserCh
             });
         }
         mViewPager.addOnPageChangeListener(new PageListener());
-        mPresenter = MainPresenter.create(mContext, new ViewCallback());
     }
 
     @Override
@@ -143,7 +148,19 @@ public class MainActivity extends DifBaseActivity implements UserManager.IUserCh
 
     @Override
     public void onUserLogin() {
-
+        if (UserManager.getInstance().isLogin()) {
+            TtCloudListener.User user = new TtCloudListener.User();
+            UserBean userBean = UserManager.getInstance().getUser();
+            user.setUserId(userBean.getUserId());
+            user.setUserName(userBean.getNickname());
+            user.setUserAvatar(userBean.getPhoto());
+            user.setUserNickName(userBean.getNickname());
+            TtCloudManager.login(user);
+            mTitleBar.setItemText("退出");
+        } else {
+            TtCloudManager.logout();
+            mTitleBar.setItemText(null);
+        }
     }
 
     @Override
@@ -153,7 +170,11 @@ public class MainActivity extends DifBaseActivity implements UserManager.IUserCh
 
     @Override
     public void onUserLogout() {
-
+        if (UserManager.getInstance().isLogin()) {
+            mTitleBar.setItemText("退出");
+        } else {
+            mTitleBar.setItemText(null);
+        }
     }
 
     private static class TabsAdapter extends FragmentPagerAdapter {
@@ -234,6 +255,7 @@ public class MainActivity extends DifBaseActivity implements UserManager.IUserCh
                 break;
         }
     }
+
 
     private class PageListener implements ViewPager.OnPageChangeListener {
 
